@@ -9,8 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 class GlobalFunction {
-    constructor() {
-    }
+    constructor() { }
     //Login
     login() {
         return __awaiter(this, void 0, void 0, function* () { });
@@ -21,8 +20,7 @@ class GlobalFunction {
     }
     //cotizar
     cotizar() {
-        return __awaiter(this, void 0, void 0, function* () {
-        });
+        return __awaiter(this, void 0, void 0, function* () { });
     }
 }
 exports.GlobalFunction = GlobalFunction;

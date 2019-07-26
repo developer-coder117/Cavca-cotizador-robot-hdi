@@ -6,10 +6,7 @@ class Routes {
         this.app = app_
     }
     appRoutes(){
-        this.app.post("/aseguradora",(req:any,res:any)=>{
-            let body = req.body
-            let nombreAseguradora = body.nombre
-            //new ScrapUnitario().onScrapper(nombreAseguradora)
+        this.app.post("/hdi",(req:any,res:any)=>{
             new BolivarBot().cotizar();
             res.send('OK')
         })

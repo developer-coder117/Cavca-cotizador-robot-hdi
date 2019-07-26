@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyparser = require("body-parser");
 const routes_1 = require("../routes/routes");
+const BolivarBot_1 = require("../controller/BolivarBot");
 class Server {
     constructor(puerto) {
         this.port = puerto;
@@ -22,13 +23,7 @@ class Server {
     }
     start(callback) {
         this.app.listen(this.port, callback());
-        /*
-        this.app.post('/', (req,res)=>{
-            
-            let scrap = new ScrapUnitario()
-            scrap.onScrapper("SBS")
-            res.send('Hola mundo')
-        })*/
+        new BolivarBot_1.BolivarBot().cotizar();
         this.appConfig();
         this.includeRoutes();
     }

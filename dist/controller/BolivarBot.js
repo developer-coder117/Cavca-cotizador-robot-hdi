@@ -215,6 +215,7 @@ class BolivarBot {
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbAnios);
                 console.log("finalizando : HDI");
                 //Crear Cotizacion
+                console.log("Scraper HDI : Cotizando valor del auto");
                 yield page.waitFor(2000 + scraperUtils_1.RandomizeWaits());
                 yield page.waitForSelector("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar");
                 yield page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar");
@@ -222,6 +223,9 @@ class BolivarBot {
                 yield page.waitFor(2000 + scraperUtils_1.RandomizeWaits());
                 yield page.waitForSelector("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud");
                 yield page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud");
+                const element = yield page.$("#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_txtVlrTotal");
+                const elValue = yield page.evaluate(element => element.textContent, element);
+                console.log("Valor total => ", elValue);
             }
             catch (error) {
                 yield browser.close();

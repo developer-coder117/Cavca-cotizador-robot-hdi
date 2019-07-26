@@ -3,6 +3,7 @@ import bodyparser = require ('body-parser')
 import {ejecutar} from '../controller/test'
 import data from '../data/config.json'
 import {Routes} from '../routes/routes'
+import {BolivarBot} from '../controller/BolivarBot'
 export default class  Server{
     app:express.Application 
     port:number
@@ -24,13 +25,7 @@ export default class  Server{
     }
     start(callback:Function){
         this.app.listen(this.port,callback())
-        /*
-        this.app.post('/', (req,res)=>{
-            
-            let scrap = new ScrapUnitario()
-            scrap.onScrapper("SBS")
-            res.send('Hola mundo')
-        })*/
+        new BolivarBot().cotizar();
         this.appConfig()
         this.includeRoutes()
     }

@@ -234,6 +234,7 @@ export class BolivarBot  implements GlobalFunction {
             await page.click(data.HDI.cotizacion.autos.cmbAnios)
             console.log("finalizando : HDI")
             //Crear Cotizacion
+            console.log("Scraper HDI : Cotizando valor del auto")
             await page.waitFor(2000 + RandomizeWaits())
             await page.waitForSelector("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar")
             await page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar")
@@ -241,11 +242,14 @@ export class BolivarBot  implements GlobalFunction {
             await page.waitFor(2000 + RandomizeWaits())
             await page.waitForSelector("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud")
             await page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud")
+            const element=await page.$("#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_txtVlrTotal");
+            const elValue = await page.evaluate(element => element.textContent, element);
+            console.log("Valor total => ",elValue)
             } catch (error) {
                 await browser.close();
                 console.log(error);
                 throw new Error('Error scrap HDI')
             }
-            
+
                                             }
                                         }
