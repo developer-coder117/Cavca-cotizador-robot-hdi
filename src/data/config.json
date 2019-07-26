@@ -1,0 +1,300 @@
+{
+    "SBS":{
+        "url":"https://www.cotizadoresgenerales.com//Cotizador.aspx",
+        "credentials":{
+            "user":"yamile.rincon@cavca.com.co",
+            "pass":"yamcon1000"
+        },
+        "login":{
+            "txtUser": ".tableFormat > tbody > tr > td > #ctl00_ContentPlaceHolder1_Login_UserName",
+            "txtPass": ".tableFormat > tbody > tr > td > #ctl00_ContentPlaceHolder1_Login_Password",
+            "btnLogin": ".tableFormat > tbody > tr > .cellBoton > #ctl00_ContentPlaceHolder1_Login_LoginButton"
+        },
+        "menu":{
+            "cotizaAuto": "tbody > #ctl00_ContentPlaceHolder1_row0 > #ctl00_ContentPlaceHolder1_cell_IntermediarioAutos > #ctl00_ContentPlaceHolder1_hlink_IntermediarioAutos > img",
+            "datosAsegurado":{
+                "cmbTipoDoc":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlTipoDocAseg",
+                "selectedTDoc":"1",
+                "txtNit":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtDVAseg",
+                "valueNit":"7",
+                "txtNumIdent": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtNumDocAseg",
+                "nDocumento":"1022386257",
+                "txtApe1": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtApe1Asegurado",
+                "valueTxtApellido":"Aragon",
+                "txtApe2": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtApe2Asegurado",
+                "valueTxtApellido2":"Vera",
+                "txtNombres": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbNombresAsegurado",
+                "valueTxtNombres":"Steben",
+                "cmbNacionalidad":"ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlNacionalidad",
+                "selectedNacionalidad":"1",
+                "cmbPaisNacimiento":"ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlLugarNace",
+                "selectedNacimiento":"1"
+            },
+            "datosConductor":{
+                "cmbTipoDocConductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlTipoDoc",
+                "selectedTipoDocConductor":"1",
+                "txtNumIdentConductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtNumIdentificacion",
+                "valueTxtNumIdentConductor":"10223862570",
+                "txtApe1Conductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtApe1Conductor",
+                "valueTxtApe1Conductor":"Aragon",
+                "txtApe2Conductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtApe2Conductor",
+                "valueTxtApe2Conductor":"Vera",
+                "txtNombresConductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbNombresConductor",
+                "valueTxtNombresConductor":"Daiver Steben",
+                "cmbGeneroConductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlGeneroConductor",
+                "selectedGeneroConductor":"1",
+                "txtFchNacimientoConductor":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtFechaNac",
+                "valueTxtFchNacimientoConductor":"27/08/1993"
+            },
+            "informacionContactoAsegu":{
+                "txtNombreContacto":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbNombreContacto",
+                "valueTxtNombreContacto0":"Daiver vera",
+                "cmbCiudadContacto":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlCiudadContacto",
+                "selectedCiudadContacto":"1",
+                "txtDireccionContacto":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtDirContacto",
+                "valueTxtDireccionContacto":"tv 52c #1-78",
+                "txtTelContacto":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbTelefonoContacto",
+                "valueTxtTelContacto":"458745",
+                "txtCelContacto":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbCelularContacto",
+                "valueTxtCelContacto":"3124125635",
+                "txtEmailContacto":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbEmailContacto",
+                "valueTxtEmailContacto":"steveava@gmail.com"
+            },
+            "datosVehiculo":{
+                "txtCodFasecolda":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_txtCodFasecolda",
+                "valueTxtFasecolda":"01606214",
+                "body":"body",
+                "cmbAnioModelo":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlModeloPorCod",
+                "selectedAnioModelo":"2010",
+                "cmbCeroKm":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlSiNoAutoCeroKm",
+                "selectedCeroKm":"1",
+                "txtPlacas":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_tbPlacas",
+                "valueTxtPlacas":"EUV410",
+                "cmbCiudadCirculacion":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlCiudadCirculacion",
+                "selectedCiudadCirculacion":"1",
+                "cmbUsoVehiculo":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlUsoVehiculo",
+                "selectUsoVehiculo":"1"
+            },
+            "responsabilidadCivil":{
+                "cmbRc": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_ddlOpcionesRC",
+                "selectedRc":"13"
+            },
+            "planesCobertura":{
+                "reemSiniestro": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_24_chkSelCob",
+                "transPerParciales":"#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_25_chkSelCob",
+                "transPerTotales": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_26_chkSelCob",
+                "llantasEstalladas": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_28_chkSelCob",
+                "peqAccesorios": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_29_chkSelCob",
+                "tramitesTransito": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_30_chkSelCob",
+                "accPersonales": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_31_chkSelCob",
+                "billeteraProtegida": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_35_chkSelCob",
+                "reemplazoLlaves": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_Adic_36_chkSelCob",
+                "rdPlanFulll": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_rbSelPaq_34",
+                "btnCotizar": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_btnCotizar"
+            },
+            "pdf": {
+                "btnDescargarPdf": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_btnGetPDF",
+                "valorCot": "#ctl00_ContentPlaceHolder1_LoginViewCotizacionWeb_lblPrimaAnual"
+            }
+        }
+    },
+    "HDI": {
+        "url": "https://www.hdi.com.co/PE_Autos/inicial.aspx",
+        "credentials": {
+            "user": "CAVCABOGOTA",
+            "pass": "Generali1"
+        },
+        "login": {
+            "input": {
+                "user": "#tblUsuario > tbody > tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_txtUsuario",
+                "password": "#tblUsuario > tbody > tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_txtClave",
+                "btn": "#tblBotones > tbody > tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_btnContinuar"
+            }
+        },
+        "menus": {
+            "intermediario": {
+                "cmb": "#tblRoll > tbody > tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_cmbRoll",
+                "cmbSelect": "8",
+                "btn": "#tblBotones1 > tbody > tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_btnContinuarRoll"
+            },
+            "polizaElec": "tr > .Focus1 > #ctl00_ContentPlaceHolder1_wucLogin3_blstMenu1 > li:nth-child(1) > a",
+            "opSol": "tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_blstMenu2 > li:nth-child(1) > a",
+            "cexped": "tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_blstMenu3 > li > a",
+            "cotizacion": "tr > td > #ctl00_ContentPlaceHolder1_wucLogin3_blstMenu4 > li:nth-child(1) > a",
+            "nuevoCexped": "#ctl00_Menu1n1 > td > table > tbody > tr > td > a"
+        },
+        "cotizacion": {
+            "encabezadoBtn": "#ctl00_ContentPlaceHolder1_ctl02_btnCompEncabezado",
+            "Intermediario": {
+                "txtComision": "table > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl04_wucIntermediario1_txtPrimerPorcentajeComision",
+                "valorCot": "18,5",
+                "btnCont": "#ctl00_ContentPlaceHolder1_ctl04_btnCompIntermediario"
+            },
+            "asegurado": {
+                "lblAsegurado": "#ctl00_ContentPlaceHolder1_ctl05_pnlAsegurado > table > tbody > tr > td:nth-child(1)",
+                "cmbTipoDoc": "#tblBusqueda > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_cmbTipoDocumento",
+                "cmbSelect": "1",
+                "txtNumDoc": "#tblBusqueda > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_txtNumeroDocumento",
+                "nDocumento":"#tblBusqueda > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_txtNumeroDocumento",
+                "nDocumentoIn":"1026277623",
+                "estrato": "#tblBusqueda > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_cmbEstratoConductor",
+                "estratoSelect": "6",
+                "nivelEduc": "#tblBusqueda > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_cmbNivelEducativoConductor",
+                "nivelEducSelect": "5",
+                "rbMasculino": "#ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_rblSexo_0",
+                "rbFemenino": "#ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_rblSexo_1",
+                "txtFechaNac": "#ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_txtFechaNacimiento",
+                "txtFecNacIn":"17/07/2000",
+                "txtEdad": "#ctl00_ContentPlaceHolder1_ctl06_wucAsegurado1_txtEdad",
+                "btn": "#tblCompAsegurado > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl06_btnCompAsegurado"
+            },
+            "autos": {
+                "txtPlaca": "#tblAutos > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_txtPlaca",
+                "txtPlacaIn": "UUU456",
+                "cmbModelo": "#tblAutos > tbody > tr > td > select#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_cmbModelo.selectNew",
+                "ModeloIn":"2004",
+                "txtFasecolda": "#tblAutos > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_txtCodFasecolda",
+                "txtFasecoldaIn": "01801070",
+                "cmbMarca":"#tblAutos > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_cmbMarca",
+                "MarcaCmb":"006",
+                "cmbClase":"#tblAutos > tbody > tr > td > select#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_cmbClase.selectNew",
+                "claseCmb":"1",
+                "cmbTipo":"#tblAutos > tbody > tr > td > select#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_cmbTipo.selectNew",
+                "tipoCmbIn":"01028",
+                "tipoTextValue":"A3 8L 1.6 COUPE MT 1600CC 3P",
+                "cmbDptoCirculacion": "#tblAutos > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_cmbDeptoCircula",
+                "dptoCirculacionSelect": "25",
+                "btnCargar": "#tblAniosDto > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnAniosDto",
+                "cmbAnios": "#tblAniosDto > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_cmbAniosDto",
+                "aniosSelect": "0",
+                "btnCotizar": "#tblBotones1 > tbody > tr > td > #ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar",
+                "valorCot": "#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_wucPrimas1_grvInfoPrimas > tbody > tr:nth-child(2) > td:nth-child(4)",
+                "btnCont1": "#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones",
+                "btnCont2": "#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnContinuar",
+                "btnGuardar": "#ctl00_ContentPlaceHolder1_btnGuardar",
+                "btnImprimir": "#ctl00_ContentPlaceHolder1_Btn_Imprimir"
+            }
+          },
+          
+          "thisbody":"body"
+        },
+    "AXA": {
+            "url": "https://sucursalenlinea.axacolpatria.co/home",
+            "credentials":{
+              "user": "1033726288",
+              "pass": "Cavca2019"
+            },
+              "login": {
+                  "user": "#_LoginPortlet_WAR_authenticationportlet_docNumber",
+                  "pass": "#_LoginPortlet_WAR_authenticationportlet_password",
+                  "btn": "#_LoginPortlet_WAR_authenticationportlet_fm > div.button-holder.text-center > button"
+              },
+              "redirect": {
+                  "form": "https://sucursalenlinea.axacolpatria.co/group/guest/herramientas/gestor-de-ventas/autos"
+              },
+              "menu":{
+                  "cmbIdDocument":"input#input_People_IdDocumentType",
+                  "cmbIdDocumentIn":"0",
+                  "txtIdDocument":"input#People_DocumentNumber.form-control",
+                  "txtIdDocumentIn":"1028932123",
+                  "selectGenero":"div.col-lg-6.col-md-6.col-sm-12.col-xs-12.no-padright > div.btn-group.filterOpt",
+                  "clickOnGenM":"Masculino",
+                  "clickOnGenF":"Femenino",
+                  "birthDate":"input#People_BirthDate.form-control.animated.BirthDateHome.valid",
+                  "birthDateIn":"2001/07/03",
+                  "concecionarioAxaColpatriaSi":"input#codFasecSi",
+                  "concecionarioAxaColpatriaNo":"input#codFasecNo",
+                  "codigoFasecolda":"div.row > div.col-lg-2.col-md-2.col-sm-12.col-xs-12 > div.form-group.has-feedback. > label.control.control--radios.CodFasecoldaValida > #text",
+                  "codigoFasecoldaResult":"SI",
+                  "placa":"input#VehiculeData_Plaque.form-control.animated",
+                  "placaIn":"UAW123",
+                  "precio":"input#VehiculeData_Price.form-control.animated.half75",
+                  "precioIn":"600000",
+                  "anio":"input#AnioFasecoldaInput.form-control",
+                  "anioIn":"1993",
+                  "marca":"select#Marca.form-control",
+                  "marcaIn":"AMPLE",
+                  "linea":"a#a_DDlinea.custom-combobox-toggle.ui-corner-right",
+                  "lineaIn":"ASN 310 L MT 9730CC 6X4 D",
+                  "model":"a#a_SelectModel.custom-combobox-toggle",
+                  "modelIn":"2007",
+                  "color":"a#a_VehiculeData_Color.custom-combobox-toggle",
+                  "colorIn":"ARENA FINA",
+                  "serviceType":"a#a_VehiculeData_VehicleServiceType",
+                  "serviceTypeIn":"PARTICULAR",
+                  "zonaCirculacion":"a#a_VehiculeData_IdCIrculationZone.custom-combobox-toggle",
+                  "circulacionIn":"BOYACA",
+                  "submitFormBtn":"input[type=submit]"
+               }
+          },
+
+    "MAPFRE":{
+        "credentials":{
+            "user":"cavcabog",
+            "pass":"Mapfre2019*"
+        },
+        "login": {
+            "user":"input#usuario.form-control",
+            "pass":"input#clave.form-control",
+            "submitBtn":"button[type=submit]"
+                  },
+                  "menuPrincipal": {
+                    "cotizar1": "#leftColumn > div.lateralIzq > ul > li:nth-child(1) > a",
+                    "cotizar2": "#leftColumn > div.lateralIzq > ul > li.active > ul > li:nth-child(1) > span > a"
+                },
+                "TipoSeguros": {
+                    "checkSuperTrebol": "#tabTiposSeguros\\:tabCotizacion\\:j_idt11_data > tr:nth-child(3) > td.ui-selection-column.text-center > div > div.ui-chkbox-box.ui-widget.ui-corner-all.ui-state-default > span",
+                    "checkParaMujer": "#tabTiposSeguros\\:tabCotizacion\\:j_idt11_data > tr:nth-child(4) > td.ui-selection-column.text-center > div > div.ui-chkbox-box.ui-widget.ui-corner-all.ui-state-default > span",
+                    "btnCotizar": "#tabTiposSeguros\\:tabCotizacion\\:j_idt19"
+                },
+                "cotizacion": {
+                    "datoSeguro": {
+                        "txtPlaca": "#COD_PLACA_NIVEL_POLIZA",
+                        "cmbOficina": "#COD_NIVEL3",
+                        "oficinaSelected": "3305"
+                    },
+                    "datosRiego": {
+                        "txtFechaNac": "#FEC_NACIMIENTO_input",
+                        "cmbGenero": "#MCA_SEXO",
+                        "cmbNumHijos": "#NUM_HIJOS",
+                        "cmbCiudad": "#COD_POSTAL_RADIC",
+                        "ciudadSelected": "11001",
+                        "cmbRce": "#NUM_OPCION_RC",
+                        "rceSelected": "109",
+                        "cmbDeducible": "#MCA_DEDCBLE_CERO_PERD_TOT",
+                        "deducibleSelected": "S",
+                        "btnCotizar": "#j_idt16 > span"
+                    }
+                },
+                "resultados": {
+                    "valorCot": "#j_idt9_data > tr > td:nth-child(6)",
+                    "caratula": "#j_idt9_data > tr > td:nth-child(9) > a",
+                    "btnDescargar": "#frmMainCorreo\\:j_idt16"
+                }
+    },
+
+    "BOLIVAR":{
+        "url":"",
+        "login":{
+            "key":""
+                },
+        "formulario":{
+
+                    }
+    },
+    "SURA":{
+        "url":"https://app.swaggerhub.com/apis-docs/Sura5/Apimovilidad/1.0.0-oas3",
+        "login":{
+            "key":"b3WP6TD4eJGZQTJCkR7rKCLehlr3IBIE"
+                },
+        "formulario":{
+
+                    }
+    }
+}
+
+
+
+
+
+
