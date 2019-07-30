@@ -41,7 +41,16 @@ export {repairBrowser}
         return random_wait;
 }
 export {RandomizeWaits}
-
+const waitForResponse = (page:any, url:any) => {
+    return new Promise(resolve => {
+        page.on("response", function callback(response:any){
+            if (response.url() === url) {
+                resolve(response);
+                page.removeListener("response",callback)
+            }
+        })
+    })
+}; export {waitForResponse}
 function Comparacion(str1:string, str2:string){
      function normalize(str:string) {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",

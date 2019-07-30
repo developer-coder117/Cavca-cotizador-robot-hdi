@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const BolivarBot_1 = require("../controller/BolivarBot");
+const HdiBot_1 = require("../controller/HdiBot");
 class Routes {
     constructor(app_) {
         this.app = app_;
     }
     appRoutes() {
         this.app.post("/hdi", (req, res) => {
-            new BolivarBot_1.BolivarBot().cotizar();
+            new HdiBot_1.HdiBot().cotizar();
             res.send('OK');
         });
     }

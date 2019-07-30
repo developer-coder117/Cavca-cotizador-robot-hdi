@@ -227,6 +227,7 @@
         }
     },
     "MAPFRE": {
+        "url": "https://cotiza.mapfre.com.co/ofiVirtualWeb/vista/paginas/loginIntermediarios.jsf",
         "credentials": {
             "user": "cavcabog",
             "pass": "Mapfre2019*"
@@ -237,24 +238,26 @@
             "submitBtn": "button[type=submit]"
         },
         "menuPrincipal": {
-            "cotizar1": "#leftColumn > div.lateralIzq > ul > li:nth-child(1) > a",
-            "cotizar2": "#leftColumn > div.lateralIzq > ul > li.active > ul > li:nth-child(1) > span > a"
+            "cotizar1": "nav > ul.nav.flex-column.align-middle > div#accordion.panel-group > div.panel.panel-default > div.panel-heading > a",
+            "cotizar2": "div#Cotizar-emitir.panel-collapse.in.collapse.show > div.panel-body > a:nth-child(2)"
         },
         "TipoSeguros": {
             "checkSuperTrebol": "#tabTiposSeguros\\:tabCotizacion\\:j_idt11_data > tr:nth-child(3) > td.ui-selection-column.text-center > div > div.ui-chkbox-box.ui-widget.ui-corner-all.ui-state-default > span",
-            "checkParaMujer": "#tabTiposSeguros\\:tabCotizacion\\:j_idt11_data > tr:nth-child(4) > td.ui-selection-column.text-center > div > div.ui-chkbox-box.ui-widget.ui-corner-all.ui-state-default > span",
             "btnCotizar": "#tabTiposSeguros\\:tabCotizacion\\:j_idt19"
         },
         "cotizacion": {
             "datoSeguro": {
                 "txtPlaca": "#COD_PLACA_NIVEL_POLIZA",
+                "txtPlacaIn": "COD456",
                 "cmbOficina": "#COD_NIVEL3",
                 "oficinaSelected": "3305"
             },
-            "datosRiego": {
+            "datosRiesgo": {
                 "txtFechaNac": "#FEC_NACIMIENTO_input",
+                "txtFecNacValue": "10/10/2000",
                 "cmbGenero": "#MCA_SEXO",
                 "cmbNumHijos": "#NUM_HIJOS",
+                "numHijos": "3",
                 "cmbCiudad": "#COD_POSTAL_RADIC",
                 "ciudadSelected": "11001",
                 "cmbRce": "#NUM_OPCION_RC",

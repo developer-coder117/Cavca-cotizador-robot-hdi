@@ -3,7 +3,9 @@ import bodyparser = require ('body-parser')
 import {ejecutar} from '../controller/test'
 import data from '../data/config.json'
 import {Routes} from '../routes/routes'
-import {BolivarBot} from '../controller/BolivarBot'
+import {HdiBot} from '../controller/HdiBot'
+import {MapfreBot} from '../controller/MapfreBot'
+import { SbsBot } from '../controller/SbsBot';
 export default class  Server{
     app:express.Application 
     port:number
@@ -25,7 +27,9 @@ export default class  Server{
     }
     start(callback:Function){
         this.app.listen(this.port,callback())
-        new BolivarBot().cotizar();
+        //new HdiBot().cotizar();
+        //new MapfreBot().cotizar();
+        new SbsBot().cotizar();
         this.appConfig()
         this.includeRoutes()
     }

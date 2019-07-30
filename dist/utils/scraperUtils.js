@@ -61,6 +61,17 @@ function RandomizeWaits() {
     return random_wait;
 }
 exports.RandomizeWaits = RandomizeWaits;
+const waitForResponse = (page, url) => {
+    return new Promise(resolve => {
+        page.on("response", function callback(response) {
+            if (response.url() === url) {
+                resolve(response);
+                page.removeListener("response", callback);
+            }
+        });
+    });
+};
+exports.waitForResponse = waitForResponse;
 function Comparacion(str1, str2) {
     function normalize(str) {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç", to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc", mapping = {};

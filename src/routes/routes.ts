@@ -1,5 +1,5 @@
 
-import {BolivarBot} from '../controller/BolivarBot'
+import {HdiBot} from '../controller/HdiBot'
 class Routes {
     app:any
     constructor(app_:any){
@@ -7,7 +7,7 @@ class Routes {
     }
     appRoutes(){
         this.app.post("/hdi",(req:any,res:any)=>{
-            new BolivarBot().cotizar();
+            new HdiBot().cotizar();
             res.send('OK')
         })
     }
