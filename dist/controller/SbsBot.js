@@ -15,6 +15,7 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 const scraperUtils_1 = require("../utils/scraperUtils");
 const scraperUtils_2 = require("../utils/scraperUtils");
 const config_json_1 = __importDefault(require("../data/config.json"));
+const { PendingXHR } = require('pending-xhr-puppeteer');
 class SbsBot {
     login() {
         throw new Error("Method not implemented.");
@@ -34,7 +35,17 @@ class SbsBot {
                 width: 1080,
                 height: 720
             });
+            const pendingXHR = new PendingXHR(page);
             try {
+                const page = yield browser.newPage();
+                //Path default de descarga
+                //await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: process.env.dirUserDataBotSbs });
+                yield page.goto(config_json_1.default.SBS.url);
+                //Definimos ancho display navegador
+                yield page.setViewport({
+                    width: 1080,
+                    height: 720
+                });
                 //===========
                 //zona logueo
                 //==========
@@ -271,11 +282,12 @@ class SbsBot {
                 yield page.waitFor(500 + scraperUtils_2.RandomizeWaits());
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.btnCotizar);
                 yield page.click(config_json_1.default.SBS.menu.planesCobertura.btnCotizar);
+                //Duda Preguntar si debe descargar el pdf }
             }
-            catch (error) {
+            catch (e) {
                 yield browser.close();
-                console.log(error);
-                throw new Error('Error scrap HDI');
+                console.log(e);
+                throw new Error("Error scrapper SBS");
             }
         });
     }

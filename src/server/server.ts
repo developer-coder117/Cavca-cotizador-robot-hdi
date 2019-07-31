@@ -6,6 +6,7 @@ import {Routes} from '../routes/routes'
 import {HdiBot} from '../controller/HdiBot'
 import {MapfreBot} from '../controller/MapfreBot'
 import { SbsBot } from '../controller/SbsBot';
+import { AxaBot } from '../controller/AxaBot';
 export default class  Server{
     app:express.Application 
     port:number
@@ -25,11 +26,12 @@ export default class  Server{
     includeRoutes(){
         new Routes(this.app).appRoutes()
     }
-    start(callback:Function){
+    start(callback:Function) {
         this.app.listen(this.port,callback())
         //new HdiBot().cotizar();
         //new MapfreBot().cotizar();
         new SbsBot().cotizar();
+        //new AxaBot().cotizar()
         this.appConfig()
         this.includeRoutes()
     }

@@ -26,6 +26,7 @@ class Server {
         //new HdiBot().cotizar();
         //new MapfreBot().cotizar();
         new SbsBot_1.SbsBot().cotizar();
+        //new AxaBot().cotizar()
         this.appConfig();
         this.includeRoutes();
     }
