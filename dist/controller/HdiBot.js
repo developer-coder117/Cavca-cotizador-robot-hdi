@@ -26,7 +26,7 @@ class HdiBot {
         return __awaiter(this, void 0, void 0, function* () {
             const browser = yield puppeteer_1.default.launch({
                 headless: false,
-                slowMo: 30
+                slowMo: 20
             });
             const page = yield browser.newPage();
             yield page.goto(config_json_1.default.HDI.url);

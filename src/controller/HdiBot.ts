@@ -14,7 +14,7 @@ export class HdiBot implements GlobalFunction {
     public async cotizar() {
         const browser = await puppeteer.launch({
             headless: false,
-            slowMo: 30
+            slowMo: 20
         });
         const page = await browser.newPage();
         await page.goto(data.HDI.url);
