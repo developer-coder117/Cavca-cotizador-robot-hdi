@@ -28,9 +28,9 @@ export default class  Server{
     }
     start(callback:Function) {
         this.app.listen(this.port,callback())
-        new HdiBot().cotizar();
+        //new HdiBot().cotizar();
         //new MapfreBot().cotizar();
-        //new SbsBot().cotizar();
+        new SbsBot().cotizar();
         //new AxaBot().cotizar()
         this.appConfig()
         this.includeRoutes()
