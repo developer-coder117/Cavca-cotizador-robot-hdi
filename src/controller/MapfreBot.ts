@@ -1,8 +1,8 @@
-import puppeteer from 'puppeteer';
-import {RandomizeWaits} from '../utils/scraperUtils';
-import {Comparacion} from '../utils/scraperUtils';
+import puppeteer from 'puppeteer'
+import {RandomizeWaits} from '../utils/scraperUtils'
 import data from '../data/config.json'
 import {GlobalFunction} from './GlobalFunction'
+const { pendingXHR } = require('pending-xhr-puppeteer');
 
 export class MapfreBot implements GlobalFunction{
     public login(): Promise<void> {
@@ -14,7 +14,7 @@ export class MapfreBot implements GlobalFunction{
     public async cotizar() {
         const browser = await puppeteer.launch({
             headless:false,
-            slowMo:30
+            slowMo:40
         });
         const page = await browser.newPage()
         await page.goto(data.MAPFRE.url);
@@ -33,6 +33,7 @@ export class MapfreBot implements GlobalFunction{
             //Elegir seguro        
              //menú principal
              try{
+             await pendingXHR.waitForAllXhrFinished();
              await console.log("Scraper Mapfre : Ingresando al menu");
              await console.log("Scraper Mapfre : Buscando selector...")
              await page.waitForSelector(data.MAPFRE.menuPrincipal.cotizar1)

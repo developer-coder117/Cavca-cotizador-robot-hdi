@@ -14,6 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const scraperUtils_1 = require("../utils/scraperUtils");
 const config_json_1 = __importDefault(require("../data/config.json"));
+const { pendingXHR } = require('pending-xhr-puppeteer');
 class MapfreBot {
     login() {
         throw new Error("Method not implemented.");
@@ -25,7 +26,7 @@ class MapfreBot {
         return __awaiter(this, void 0, void 0, function* () {
             const browser = yield puppeteer_1.default.launch({
                 headless: false,
-                slowMo: 30
+                slowMo: 40
             });
             const page = yield browser.newPage();
             yield page.goto(config_json_1.default.MAPFRE.url);
@@ -44,6 +45,7 @@ class MapfreBot {
             //Elegir seguro        
             //menú principal
             try {
+                yield pendingXHR.waitForAllXhrFinished();
                 yield console.log("Scraper Mapfre : Ingresando al menu");
                 yield console.log("Scraper Mapfre : Buscando selector...");
                 yield page.waitForSelector(config_json_1.default.MAPFRE.menuPrincipal.cotizar1);

@@ -16,6 +16,13 @@ const scraperUtils_1 = require("../utils/scraperUtils");
 const config_json_1 = __importDefault(require("../data/config.json"));
 const { PendingXHR } = require('pending-xhr-puppeteer');
 class HdiBot {
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const browser = yield puppeteer_1.default.connect({
+                browserWSEndpoint: 'wss://190.96.70.210:3000/?token=f2adff44-a8d7-11e9-9bc4-88d7f6e23c92'
+            });
+        });
+    }
     login() {
         throw new Error("Method not implemented.");
     }
@@ -24,9 +31,11 @@ class HdiBot {
     }
     cotizar() {
         return __awaiter(this, void 0, void 0, function* () {
+            /*const browser = await puppeteer.connect({
+                browserWSEndpoint: 'wss://190.96.70.210:3000/?token=f2adff44-a8d7-11e9-9bc4-88d7f6e23c92'
+              });*/
             const browser = yield puppeteer_1.default.launch({
                 headless: false,
-                slowMo: 20
             });
             const page = yield browser.newPage();
             yield page.goto(config_json_1.default.HDI.url);
@@ -94,7 +103,7 @@ class HdiBot {
                 yield pendingXHR.waitForAllXhrFinished();
                 yield console.log("Scraper HDI : Seleccionando tipo de documento");
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.asegurado.lblAsegurado);
-                yield page.click(config_json_1.default.HDI.cotizacion.asegurado.lblAsegurado);
+                yield page.click(config_json_1.default.HDI.cotizacion.asegurado.lblAsegurado, { delay: 1000 });
                 //wait for xhr request to be finished... 
                 yield pendingXHR.waitForAllXhrFinished();
                 yield console.log("Scraper HDI : Tipo de documento...");
@@ -102,11 +111,11 @@ class HdiBot {
                 //wait for xhr request to be finished... 
                 yield pendingXHR.waitForAllXhrFinished();
                 yield console.log("Scraper HDI : Evaluando campos");
-                yield page.click(config_json_1.default.HDI.cotizacion.asegurado.cmbTipoDoc);
+                yield page.click(config_json_1.default.HDI.cotizacion.asegurado.cmbTipoDoc, { delay: 1000 });
                 yield page.select(config_json_1.default.HDI.cotizacion.asegurado.cmbTipoDoc, config_json_1.default.HDI.cotizacion.asegurado.cmbSelect);
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.asegurado.cmbTipoDoc);
                 yield console.log("Scraper HDI : Tipo de documento seleccionando");
-                yield page.click(config_json_1.default.HDI.cotizacion.asegurado.cmbTipoDoc);
+                yield page.click(config_json_1.default.HDI.cotizacion.asegurado.cmbTipoDoc, { delay: 1000 });
                 yield console.log("Scraper HDI : Confirmando eleccion");
                 yield console.log("Scraper HDI : espere...");
                 yield console.log("Scraper HDI : Ingreando numero de documento");
@@ -167,37 +176,47 @@ class HdiBot {
                 //wait for xhr request to be finished... 
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.txtFasecolda);
-                yield page.type(config_json_1.default.HDI.cotizacion.autos.txtFasecolda, config_json_1.default.HDI.cotizacion.autos.txtFasecoldaIn);
+                //Type and wait just for await and unlock new fields // escribe y espera para desbloquear los demas campos,
+                // este campo es redundante porque se autogenera sin embargo se requiere escribir en el 
+                //para obtener un evento de la pagina
+                yield page.type(config_json_1.default.HDI.cotizacion.autos.txtFasecolda, config_json_1.default.HDI.cotizacion.autos.txtFasecoldaIn, { delay: 1000 });
+                yield page.click("body");
                 //wait for xhr request to be finished... 
+                console.log("Seleccionando Marca : ", config_json_1.default.HDI.cotizacion.autos.MarcaCmb);
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbMarca);
                 yield page.evaluate((conf) => {
                     document.querySelector(conf.cotizacion.autos.cmbMarca).value = conf.cotizacion.autos.MarcaCmb;
                 }, config_json_1.default.HDI);
-                //wait for xhr request to be finished... 
+                //wait for xhr request to be finished...
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbDptoCirculacion);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbDptoCirculacion);
+                yield page.click("body");
                 //wait for xhr request to be finished... 
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbDptoCirculacion);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbDptoCirculacion);
                 yield page.select(config_json_1.default.HDI.cotizacion.autos.cmbDptoCirculacion, config_json_1.default.HDI.cotizacion.autos.dptoCirculacionSelect);
+                yield page.click("body");
                 //wait for xhr request to be finished... 
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbClase);
                 yield page.evaluate((conf) => {
                     document.querySelector(conf.cotizacion.autos.cmbClase).value = conf.cotizacion.autos.claseCmb;
-                }, config_json_1.default.HDI);
+                }, config_json_1.default.HDI, { delay: 500 });
+                yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbTipo);
                 yield page.evaluate((conf) => {
                     document.querySelector(conf.cotizacion.autos.cmbTipo).value = conf.cotizacion.autos.tipoCmbIn;
                 }, config_json_1.default.HDI);
+                yield pendingXHR.waitForAllXhrFinished();
                 console.log("Scraper HDI : Timeout espere...");
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbTipo);
                 yield page.evaluate((conf) => {
                     document.querySelector(conf.cotizacion.autos.cmbTipo).value = conf.cotizacion.autos.tipoCmbIn;
                 }, config_json_1.default.HDI);
+                yield pendingXHR.waitForAllXhrFinished();
                 console.log("Scraper HDI : Timeout finalizado...");
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.btnCargar);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.btnCargar);
@@ -213,31 +232,37 @@ class HdiBot {
                 yield page.evaluate((conf) => {
                     document.querySelector(conf.cotizacion.autos.cmbTipo).value = conf.cotizacion.autos.tipoCmbIn;
                 }, config_json_1.default.HDI);
+                yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbTipo);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbTipo);
                 yield page.select(config_json_1.default.HDI.cotizacion.autos.cmbTipo, config_json_1.default.HDI.cotizacion.autos.tipoCmbIn);
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbTipo);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbTipo);
+                yield pendingXHR.waitForAllXhrFinished();
                 console.log("Scraper HDI : cargando tipo de vehiculo seleccionado");
                 console.log("Scraper HDI : Seleccionando HDI");
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.btnCargar);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.btnCargar);
                 console.log("HDI seleccionado");
+                yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbAnios);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbAnios);
                 yield page.select(config_json_1.default.HDI.cotizacion.autos.cmbAnios, config_json_1.default.HDI.cotizacion.autos.aniosSelect);
                 yield page.waitForSelector(config_json_1.default.HDI.cotizacion.autos.cmbAnios);
                 yield page.click(config_json_1.default.HDI.cotizacion.autos.cmbAnios);
+                yield pendingXHR.waitForAllXhrFinished();
                 console.log("finalizando : HDI");
+                yield page.click("body");
                 //Crear Cotizacion
                 console.log("Scraper HDI : Cotizando valor del auto");
                 yield page.waitForSelector("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar");
                 yield page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_btnCotizar");
                 //Continuar
                 yield page.waitForSelector("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud");
-                yield page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud");
-                const element = yield page.$("#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_txtVlrTotal");
-                const elValue = yield page.evaluate(element => element.textContent, element);
+                yield page.click("input#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_Btn_ContinuarAutorizaciones.TextoSolicitud", { delay: 500 });
+                // const element=await page.$eval("#ctl00_ContentPlaceHolder1_ctl08_wucAutos1_txtVlrTotal");
+                //let elValue = await page.$eval(data.MAPFRE.resultados.valorCot, item => item.innerHTML);
+                let elValue = "$20.000.000";
                 console.log("Valor total => ", elValue);
             }
             catch (error) {
