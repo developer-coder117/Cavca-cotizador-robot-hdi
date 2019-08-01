@@ -4,7 +4,129 @@ import {RandomizeWaits} from '../utils/scraperUtils'
 import data from '../data/config.json'
 import {GlobalFunction} from './GlobalFunction'
 const { PendingXHR } = require('pending-xhr-puppeteer');
+interface RootObject {
+  SBS: SBS;
+}
 
+interface SBS {
+  url: string;
+  credentials: Credentials;
+  login: Login;
+  menu: Menu;
+}
+
+interface Menu {
+  cotizaAuto: string;
+  datosAsegurado: DatosAsegurado;
+  datosConductor: DatosConductor;
+  informacionContactoAsegu: InformacionContactoAsegu;
+  datosVehiculo: DatosVehiculo;
+  responsabilidadCivil: ResponsabilidadCivil;
+  planesCobertura: PlanesCobertura;
+  pdf: Pdf;
+}
+
+interface Pdf {
+  btnDescargarPdf: string;
+  valorCot: string;
+}
+
+interface PlanesCobertura {
+  reemSiniestro: string;
+  transPerParciales: string;
+  transPerTotales: string;
+  llantasEstalladas: string;
+  peqAccesorios: string;
+  tramitesTransito: string;
+  accPersonales: string;
+  billeteraProtegida: string;
+  reemplazoLlaves: string;
+  rdPlanFulll: string;
+  btnCotizar: string;
+}
+
+interface ResponsabilidadCivil {
+  cmbRc: string;
+  selectedRc: string;
+}
+
+interface DatosVehiculo {
+  txtCodFasecolda: string;
+  valueTxtFasecolda: string;
+  body: string;
+  cmbAnioModelo: string;
+  selectedAnioModelo: string;
+  cmbCeroKm: string;
+  selectedCeroKm: string;
+  txtPlacas: string;
+  valueTxtPlacas: string;
+  cmbCiudadCirculacion: string;
+  selectedCiudadCirculacion: string;
+  cmbUsoVehiculo: string;
+  selectUsoVehiculo: string;
+}
+
+interface InformacionContactoAsegu {
+  txtNombreContacto: string;
+  valueTxtNombreContacto0: string;
+  cmbCiudadContacto: string;
+  selectedCiudadContacto: string;
+  txtDireccionContacto: string;
+  valueTxtDireccionContacto: string;
+  txtTelContacto: string;
+  valueTxtTelContacto: string;
+  txtCelContacto: string;
+  valueTxtCelContacto: string;
+  txtEmailContacto: string;
+  valueTxtEmailContacto: string;
+}
+
+interface DatosConductor {
+  cmbTipoDocConductor: string;
+  selectedTipoDocConductor: string;
+  txtNumIdentConductor: string;
+  valueTxtNumIdentConductor: string;
+  txtApe1Conductor: string;
+  valueTxtApe1Conductor: string;
+  txtApe2Conductor: string;
+  valueTxtApe2Conductor: string;
+  txtNombresConductor: string;
+  valueTxtNombresConductor: string;
+  cmbGeneroConductor: string;
+  selectedGeneroConductor: string;
+  txtFchNacimientoConductor: string;
+  valueTxtFchNacimientoConductor: string;
+}
+
+interface DatosAsegurado {
+  cmbTipoDoc: string;
+  selectedTDoc: string;
+  txtNit: string;
+  valueNit: string;
+  txtNumIdent: string;
+  nDocumento: string;
+  txtApe1: string;
+  valueTxtApellido: string;
+  txtApe2: string;
+  valueTxtApellido2: string;
+  txtNombres: string;
+  valueTxtNombres: string;
+  cmbNacionalidad: string;
+  selectedNacionalidad: string;
+  cmbPaisNacimiento: string;
+  selectedNacimiento: string;
+}
+
+interface Login {
+  txtUser: string;
+  txtPass: string;
+  btnLogin: string;
+}
+
+interface Credentials {
+  user: string;
+  pass: string;
+}
 export class SbsBot  implements GlobalFunction {
     public login(): Promise<void> {
         throw new Error("Method not implemented.");
@@ -13,7 +135,7 @@ export class SbsBot  implements GlobalFunction {
     }
     public async cotizar() {
       /*const browser = await puppeteer.connect({
-        browserWSEndpoint: 'wss://190.96.70.210:3000/?token=f2adff44-a8d7-11e9-9bc4-88d7f6e23c92'
+        browserWSEndpoint: 'wss://190.96.70.210:10000/?token=f2adff44-a8d7-11e9-9bc4-88d7f6e23c92'
       });
       */ 
        const browser = await puppeteer.launch({
@@ -50,7 +172,7 @@ export class SbsBot  implements GlobalFunction {
       await page.click("body")
       await console.log("Incio zona cotizador")
       await page.waitForSelector(data.SBS.menu.cotizaAuto)
-      await page.click(data.SBS.menu.cotizaAuto,{delay:3000})
+      await page.click(data.SBS.menu.cotizaAuto,{delay:10000})
       //fin zona cotizador
       //=============================
       //zona Menu datos del asegurado
@@ -180,22 +302,22 @@ export class SbsBot  implements GlobalFunction {
        await page.click(data.SBS.menu.datosVehiculo.cmbAnioModelo)
        await page.select(data.SBS.menu.datosVehiculo.cmbAnioModelo,data.SBS.menu.datosVehiculo.selectedAnioModelo)
        await page.waitForSelector(data.SBS.menu.datosVehiculo.cmbAnioModelo)
-       await page.click(data.SBS.menu.datosVehiculo.cmbAnioModelo,{delay:300})
+       await page.click(data.SBS.menu.datosVehiculo.cmbAnioModelo,{delay:1000})
 
        //seleccionamos si el  vehiculo es cero kilometros
        await pendingXHR.waitForAllXhrFinished();
        await page.waitForSelector(data.SBS.menu.datosVehiculo.cmbCeroKm)
        await page.select(data.SBS.menu.datosVehiculo.cmbCeroKm,data.SBS.menu.datosVehiculo.selectedCeroKm)
        await page.waitForSelector(data.SBS.menu.datosVehiculo.cmbCeroKm)
-       await page.click(data.SBS.menu.datosVehiculo.cmbCeroKm,{delay:300})
+       await page.click(data.SBS.menu.datosVehiculo.cmbCeroKm,{delay:1000})
 
       //Ingresamos placas del vehiculo
-       //await page.waitFor(500 + RandomizeWaits())
+       //await page.waitFor(1000 + RandomizeWaits())
        await page.waitForSelector(data.SBS.menu.datosVehiculo.txtPlacas)
        await page.type(data.SBS.menu.datosVehiculo.txtPlacas,data.SBS.menu.datosVehiculo.valueTxtPlacas)
 
        //Seleccionamos la ciudad de circulacioc¿n
-       //await page.waitFor(3000 + RandomizeWaits())
+       //await page.waitFor(10000 + RandomizeWaits())
        await page.waitForSelector(data.SBS.menu.datosVehiculo.cmbCiudadCirculacion)
        await page.click(data.SBS.menu.datosVehiculo.cmbCiudadCirculacion)
        await page.select(data.SBS.menu.datosVehiculo.cmbCiudadCirculacion,data.SBS.menu.datosVehiculo.selectedCiudadCirculacion)
@@ -203,7 +325,7 @@ export class SbsBot  implements GlobalFunction {
        await page.click(data.SBS.menu.datosVehiculo.cmbCiudadCirculacion)
 
        //Seleccionamos el usuo del vehiculo
-       await page.waitFor(500)
+       await page.waitFor(1000)
        await page.waitForSelector(data.SBS.menu.datosVehiculo.cmbUsoVehiculo)
        await page.click(data.SBS.menu.datosVehiculo.cmbUsoVehiculo)
        await page.select(data.SBS.menu.datosVehiculo.cmbUsoVehiculo,data.SBS.menu.datosVehiculo.selectUsoVehiculo)
@@ -221,7 +343,7 @@ export class SbsBot  implements GlobalFunction {
       await page.click(data.SBS.menu.responsabilidadCivil.cmbRc)
       await page.select(data.SBS.menu.responsabilidadCivil.cmbRc,data.SBS.menu.responsabilidadCivil.selectedRc)
       await page.waitForSelector(data.SBS.menu.responsabilidadCivil.cmbRc)
-      await page.click(data.SBS.menu.responsabilidadCivil.cmbRc,{delay:300})
+      await page.click(data.SBS.menu.responsabilidadCivil.cmbRc,{delay:1000})
       //Fin datos responsabilidad civil
 
       //==================================
@@ -235,51 +357,51 @@ export class SbsBot  implements GlobalFunction {
       //seleccionamos vehiculo de reemplazo por siniestro
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.reemSiniestro)
-      await page.click(data.SBS.menu.planesCobertura.reemSiniestro,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.reemSiniestro,{delay:1000})
       //Seleccionamos gastos transporte perdidas parciales
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.transPerParciales)
-      await page.click(data.SBS.menu.planesCobertura.transPerParciales,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.transPerParciales,{delay:1000})
       //Seleccionamos gastos transporte por perdidas totales
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.transPerTotales)
-      await page.click(data.SBS.menu.planesCobertura.transPerTotales,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.transPerTotales,{delay:1000})
       //Seleccionamos llantas estalladas
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.llantasEstalladas)
-      await page.click(data.SBS.menu.planesCobertura.llantasEstalladas,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.llantasEstalladas,{delay:1000})
       //Seleccionamos pequeños accesorios
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.peqAccesorios)
-      await page.click(data.SBS.menu.planesCobertura.peqAccesorios,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.peqAccesorios,{delay:1000})
       //Seleccionamos tramites de transito
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.tramitesTransito)
-      await page.click(data.SBS.menu.planesCobertura.tramitesTransito,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.tramitesTransito,{delay:1000})
       //Seleccionamos Accidentes personales asegurado y ocupantes
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.accPersonales)
-      await page.click(data.SBS.menu.planesCobertura.accPersonales,{delay:300})  
+      await page.click(data.SBS.menu.planesCobertura.accPersonales,{delay:1000})  
       //Seleccionamos billetera protegida
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.billeteraProtegida)
-      await page.click(data.SBS.menu.planesCobertura.billeteraProtegida,{delay:300}) 
+      await page.click(data.SBS.menu.planesCobertura.billeteraProtegida,{delay:1000}) 
       //Seleccionamos Reemplazo de llaves del vehiculo
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.reemplazoLlaves)
-      await page.click(data.SBS.menu.planesCobertura.reemplazoLlaves,{delay:300}) 
+      await page.click(data.SBS.menu.planesCobertura.reemplazoLlaves,{delay:1000}) 
       //Duda preguntar si debemos seleccionar asistencia platino y documentos protegidos
       //Seleccionamos el plan de cobertura full
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.rdPlanFulll)
-      await page.click(data.SBS.menu.planesCobertura.rdPlanFulll,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.rdPlanFulll,{delay:1000})
       //Click en el btn cotizar
       await pendingXHR.waitForAllXhrFinished();
       await page.waitForSelector(data.SBS.menu.planesCobertura.btnCotizar)
-      await page.click(data.SBS.menu.planesCobertura.btnCotizar,{delay:300})
+      await page.click(data.SBS.menu.planesCobertura.btnCotizar,{delay:1000})
         } catch (error) {
           console.log("Error")
-            await page.waitFor(30000)
+            await page.waitFor(100000)
             await browser.close();
             console.log(error);
             throw new Error('Error scrap HDI')
