@@ -7,6 +7,7 @@ import {HdiBot} from '../controller/HdiBot'
 import {MapfreBot} from '../controller/MapfreBot'
 import { SbsBot } from '../controller/SbsBot';
 import { AxaBot } from '../controller/AxaBot';
+import { SEBot } from '../controller/SegurosEstado';
 export default class  Server{
     app:express.Application 
     port:number
@@ -30,8 +31,9 @@ export default class  Server{
         this.app.listen(this.port,callback())
         //new HdiBot().cotizar();
         //new MapfreBot().cotizar();
-        new SbsBot().cotizar();
-        //new AxaBot().cotizar()
+        //new SbsBot().cotizar();
+        //new AxaBot().cotizar();
+        new SEBot().cotizar()
         this.appConfig()
         this.includeRoutes()
     }

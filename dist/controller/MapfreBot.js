@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const scraperUtils_1 = require("../utils/scraperUtils");
 const config_json_1 = __importDefault(require("../data/config.json"));
-const { pendingXHR } = require('pending-xhr-puppeteer');
+const { PendingXHR } = require('pending-xhr-puppeteer');
 class MapfreBot {
     login() {
         throw new Error("Method not implemented.");
@@ -34,6 +34,7 @@ class MapfreBot {
                 width: 1200,
                 height: 900
             });
+            const pendingXHR = new PendingXHR(page);
             //login
             yield console.log("Scraper Mapfre : ingresando a login");
             yield page.waitForSelector(config_json_1.default.MAPFRE.login.user);
@@ -45,7 +46,6 @@ class MapfreBot {
             //Elegir seguro        
             //menú principal
             try {
-                yield pendingXHR.waitForAllXhrFinished();
                 yield console.log("Scraper Mapfre : Ingresando al menu");
                 yield console.log("Scraper Mapfre : Buscando selector...");
                 yield page.waitForSelector(config_json_1.default.MAPFRE.menuPrincipal.cotizar1);
@@ -58,11 +58,98 @@ class MapfreBot {
                 yield page.click(config_json_1.default.MAPFRE.menuPrincipal.cotizar2);
                 yield console.log("Scraper Mapfre : Accediendo...");
                 yield console.log("Scraper Mapfre : Seleccionando tipo de seguro");
-                yield page.waitFor(10000);
+                yield page.click("body");
+                const objectHref = yield page.evaluate(() => Array.from(document.querySelectorAll('object[data]'), object => object.getAttribute('data')));
+                console.log("Move into this page ==>", objectHref);
+                page.goto(`${objectHref}`);
+                yield page.waitFor(3000);
+                yield page.waitForSelector('.ui-widget-content:nth-child(3) > .ui-selection-column > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon');
+                yield page.click('.ui-widget-content:nth-child(3) > .ui-selection-column > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon');
+                yield yield page.waitForSelector('.col-sm-12 > .row > .col-sm-4 > #tabCotizacion:j_idt16 > .ui-button-text');
+                yield page.click('.col-sm-12 > .row > .col-sm-4 > #tabCotizacion:j_idt16 > .ui-button-text');
+                //seguros a elegir
                 yield page.waitForSelector(config_json_1.default.MAPFRE.TipoSeguros.checkSuperTrebol);
                 yield page.click(config_json_1.default.MAPFRE.TipoSeguros.checkSuperTrebol);
-                yield console.log("Scraper Mapfre : Confirmando tipo de seguro... ");
+                yield page.waitForSelector(config_json_1.default.MAPFRE.TipoSeguros.btnCotizar);
                 yield page.click(config_json_1.default.MAPFRE.TipoSeguros.btnCotizar);
+                //cotizacion
+                //datos del seguro
+                yield page.waitFor(2000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datoSeguro.txtPlaca);
+                yield page.type(config_json_1.default.MAPFRE.cotizacion.datoSeguro.txtPlaca, config_json_1.default.MAPFRE.cotizacion.datoSeguro.txtPlacaIn);
+                yield page.waitForSelector('body');
+                yield page.click('body');
+                yield page.waitFor(7000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
+                yield page.select(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina, config_json_1.default.MAPFRE.cotizacion.datoSeguro.oficinaSelected);
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
+                //datos del riesgo
+                let fechaNac = config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFechaNac;
+                fechaNac = fechaNac.replace("/", "");
+                fechaNac = fechaNac.replace("/", "");
+                yield page.waitFor(6000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFechaNac);
+                yield page.type(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFechaNac, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFecNacValue);
+                yield page.waitForSelector('body');
+                yield page.click('body');
+                yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
+                //await page.select(data.MAPFRE.cotizacion.datosRiesgo.cmbGenero, genero)
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
+                yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
+                yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.numHijos);
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
+                yield page.waitForSelector('body');
+                yield page.click('body');
+                yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
+                yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.ciudadSelected);
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
+                yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
+                yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.rceSelected);
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
+                yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
+                yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.deducibleSelected);
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
+                yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.btnCotizar);
+                yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.btnCotizar);
+                //resultados -- tabla
+                yield page.waitFor(20000 + scraperUtils_1.RandomizeWaits());
+                let valorCot = "10000"; //await page.$eval(data.MAPFRE.resultados.valorCot, item => item.innerText);
+                valorCot = valorCot.replace(".", "");
+                valorCot = valorCot.replace(".", "");
+                console.log(valorCot);
+                yield page.waitFor(1000 + scraperUtils_1.RandomizeWaits());
+                yield page.waitForSelector(config_json_1.default.MAPFRE.resultados.caratula);
+                yield page.click(config_json_1.default.MAPFRE.resultados.caratula);
+                yield console.log("Scraper Mapfre : Termino de formulario");
+                //pdf
+                yield console.log("Scraper Mapfre : Generando FDF");
+                yield page.waitFor(10000 + scraperUtils_1.RandomizeWaits());
+                let pages = yield browser.pages();
+                yield pages[2].waitFor(6000 + scraperUtils_1.RandomizeWaits());
+                yield pages[2].waitForSelector(config_json_1.default.MAPFRE.resultados.btnDescargar);
+                yield pages[2].click(config_json_1.default.MAPFRE.resultados.btnDescargar);
+                yield console.log("Scraper Mapfre : PDF Generado");
+                let retorno = {
+                    "value": `${valorCot}`
+                };
             }
             catch (e) {
                 yield page.keyboard.press('Enter');
@@ -70,92 +157,15 @@ class MapfreBot {
                 yield browser.close();
                 throw new Error('Error scrap Mapfre');
             }
-            //seguros a elegir
-            yield page.waitForSelector(config_json_1.default.MAPFRE.TipoSeguros.checkSuperTrebol);
-            yield page.click(config_json_1.default.MAPFRE.TipoSeguros.checkSuperTrebol);
-            yield page.waitForSelector(config_json_1.default.MAPFRE.TipoSeguros.btnCotizar);
-            yield page.click(config_json_1.default.MAPFRE.TipoSeguros.btnCotizar);
-            //cotizacion
-            //datos del seguro
-            yield page.waitFor(2000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datoSeguro.txtPlaca);
-            yield page.type(config_json_1.default.MAPFRE.cotizacion.datoSeguro.txtPlaca, config_json_1.default.MAPFRE.cotizacion.datoSeguro.txtPlacaIn);
-            yield page.waitForSelector('body');
-            yield page.click('body');
-            yield page.waitFor(7000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
-            yield page.select(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina, config_json_1.default.MAPFRE.cotizacion.datoSeguro.oficinaSelected);
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datoSeguro.cmbOficina);
-            //datos del riesgo
-            let fechaNac = config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFechaNac;
-            fechaNac = fechaNac.replace("/", "");
-            fechaNac = fechaNac.replace("/", "");
-            yield page.waitFor(6000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFechaNac);
-            yield page.type(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFechaNac, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.txtFecNacValue);
-            yield page.waitForSelector('body');
-            yield page.click('body');
-            yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
-            //await page.select(data.MAPFRE.cotizacion.datosRiesgo.cmbGenero, genero)
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbGenero);
-            yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
-            yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.numHijos);
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbNumHijos);
-            yield page.waitForSelector('body');
-            yield page.click('body');
-            yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
-            yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.ciudadSelected);
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbCiudad);
-            yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
-            yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.rceSelected);
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbRce);
-            yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
-            yield page.select(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible, config_json_1.default.MAPFRE.cotizacion.datosRiesgo.deducibleSelected);
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.cmbDeducible);
-            yield page.waitFor(5000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.btnCotizar);
-            yield page.click(config_json_1.default.MAPFRE.cotizacion.datosRiesgo.btnCotizar);
-            //resultados -- tabla
-            yield page.waitFor(20000 + scraperUtils_1.RandomizeWaits());
-            let valorCot = "10000"; //await page.$eval(data.MAPFRE.resultados.valorCot, item => item.innerText);
-            valorCot = valorCot.replace(".", "");
-            valorCot = valorCot.replace(".", "");
-            console.log(valorCot);
-            yield page.waitFor(1000 + scraperUtils_1.RandomizeWaits());
-            yield page.waitForSelector(config_json_1.default.MAPFRE.resultados.caratula);
-            yield page.click(config_json_1.default.MAPFRE.resultados.caratula);
-            yield console.log("Scraper Mapfre : Termino de formulario");
-            //pdf
-            yield console.log("Scraper Mapfre : Generando FDF");
-            yield page.waitFor(10000 + scraperUtils_1.RandomizeWaits());
-            let pages = yield browser.pages();
-            yield pages[2].waitFor(6000 + scraperUtils_1.RandomizeWaits());
-            yield pages[2].waitForSelector(config_json_1.default.MAPFRE.resultados.btnDescargar);
-            yield pages[2].click(config_json_1.default.MAPFRE.resultados.btnDescargar);
-            yield console.log("Scraper Mapfre : PDF Generado");
-            let retorno = {
-                "value": `${valorCot}`
-            };
-            yield pages[2].waitFor(15000 + scraperUtils_1.RandomizeWaits());
-            yield browser.close();
         });
     }
 }
 exports.MapfreBot = MapfreBot;
+/*
+const puppeteer = require('puppeteer');
+
+
+
+await browser.close()
+})()
+*/ 

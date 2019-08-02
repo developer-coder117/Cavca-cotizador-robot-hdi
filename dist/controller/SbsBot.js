@@ -25,7 +25,7 @@ class SbsBot {
     cotizar() {
         return __awaiter(this, void 0, void 0, function* () {
             /*const browser = await puppeteer.connect({
-              browserWSEndpoint: 'wss://190.96.70.210:3000/?token=f2adff44-a8d7-11e9-9bc4-88d7f6e23c92'
+              browserWSEndpoint: 'wss://190.96.70.210:10000/?token=f2adff44-a8d7-11e9-9bc4-88d7f6e23c92'
             });
             */
             const browser = yield puppeteer_1.default.launch({
@@ -61,7 +61,7 @@ class SbsBot {
                 yield page.click("body");
                 yield console.log("Incio zona cotizador");
                 yield page.waitForSelector(config_json_1.default.SBS.menu.cotizaAuto);
-                yield page.click(config_json_1.default.SBS.menu.cotizaAuto, { delay: 3000 });
+                yield page.click(config_json_1.default.SBS.menu.cotizaAuto, { delay: 10000 });
                 //fin zona cotizador
                 //=============================
                 //zona Menu datos del asegurado
@@ -174,26 +174,26 @@ class SbsBot {
                 yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbAnioModelo);
                 yield page.select(config_json_1.default.SBS.menu.datosVehiculo.cmbAnioModelo, config_json_1.default.SBS.menu.datosVehiculo.selectedAnioModelo);
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.cmbAnioModelo);
-                yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbAnioModelo, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbAnioModelo, { delay: 1000 });
                 //seleccionamos si el  vehiculo es cero kilometros
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.cmbCeroKm);
                 yield page.select(config_json_1.default.SBS.menu.datosVehiculo.cmbCeroKm, config_json_1.default.SBS.menu.datosVehiculo.selectedCeroKm);
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.cmbCeroKm);
-                yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbCeroKm, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbCeroKm, { delay: 1000 });
                 //Ingresamos placas del vehiculo
-                //await page.waitFor(500 + RandomizeWaits())
+                //await page.waitFor(1000 + RandomizeWaits())
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.txtPlacas);
                 yield page.type(config_json_1.default.SBS.menu.datosVehiculo.txtPlacas, config_json_1.default.SBS.menu.datosVehiculo.valueTxtPlacas);
                 //Seleccionamos la ciudad de circulacioc¿n
-                //await page.waitFor(3000 + RandomizeWaits())
+                //await page.waitFor(10000 + RandomizeWaits())
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.cmbCiudadCirculacion);
                 yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbCiudadCirculacion);
                 yield page.select(config_json_1.default.SBS.menu.datosVehiculo.cmbCiudadCirculacion, config_json_1.default.SBS.menu.datosVehiculo.selectedCiudadCirculacion);
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.cmbCiudadCirculacion);
                 yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbCiudadCirculacion);
                 //Seleccionamos el usuo del vehiculo
-                yield page.waitFor(500);
+                yield page.waitFor(1000);
                 yield page.waitForSelector(config_json_1.default.SBS.menu.datosVehiculo.cmbUsoVehiculo);
                 yield page.click(config_json_1.default.SBS.menu.datosVehiculo.cmbUsoVehiculo);
                 yield page.select(config_json_1.default.SBS.menu.datosVehiculo.cmbUsoVehiculo, config_json_1.default.SBS.menu.datosVehiculo.selectUsoVehiculo);
@@ -209,7 +209,7 @@ class SbsBot {
                 yield page.click(config_json_1.default.SBS.menu.responsabilidadCivil.cmbRc);
                 yield page.select(config_json_1.default.SBS.menu.responsabilidadCivil.cmbRc, config_json_1.default.SBS.menu.responsabilidadCivil.selectedRc);
                 yield page.waitForSelector(config_json_1.default.SBS.menu.responsabilidadCivil.cmbRc);
-                yield page.click(config_json_1.default.SBS.menu.responsabilidadCivil.cmbRc, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.responsabilidadCivil.cmbRc, { delay: 1000 });
                 //Fin datos responsabilidad civil
                 //==================================
                 //Zona de datos para los deducibles  --> Duda deben quedar todos en 0 % ? 
@@ -222,52 +222,52 @@ class SbsBot {
                 //seleccionamos vehiculo de reemplazo por siniestro
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.reemSiniestro);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.reemSiniestro, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.reemSiniestro, { delay: 1000 });
                 //Seleccionamos gastos transporte perdidas parciales
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.transPerParciales);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.transPerParciales, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.transPerParciales, { delay: 1000 });
                 //Seleccionamos gastos transporte por perdidas totales
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.transPerTotales);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.transPerTotales, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.transPerTotales, { delay: 1000 });
                 //Seleccionamos llantas estalladas
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.llantasEstalladas);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.llantasEstalladas, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.llantasEstalladas, { delay: 1000 });
                 //Seleccionamos pequeños accesorios
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.peqAccesorios);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.peqAccesorios, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.peqAccesorios, { delay: 1000 });
                 //Seleccionamos tramites de transito
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.tramitesTransito);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.tramitesTransito, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.tramitesTransito, { delay: 1000 });
                 //Seleccionamos Accidentes personales asegurado y ocupantes
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.accPersonales);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.accPersonales, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.accPersonales, { delay: 1000 });
                 //Seleccionamos billetera protegida
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.billeteraProtegida);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.billeteraProtegida, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.billeteraProtegida, { delay: 1000 });
                 //Seleccionamos Reemplazo de llaves del vehiculo
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.reemplazoLlaves);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.reemplazoLlaves, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.reemplazoLlaves, { delay: 1000 });
                 //Duda preguntar si debemos seleccionar asistencia platino y documentos protegidos
                 //Seleccionamos el plan de cobertura full
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.rdPlanFulll);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.rdPlanFulll, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.rdPlanFulll, { delay: 1000 });
                 //Click en el btn cotizar
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SBS.menu.planesCobertura.btnCotizar);
-                yield page.click(config_json_1.default.SBS.menu.planesCobertura.btnCotizar, { delay: 300 });
+                yield page.click(config_json_1.default.SBS.menu.planesCobertura.btnCotizar, { delay: 1000 });
             }
             catch (error) {
                 console.log("Error");
-                yield page.waitFor(30000);
+                yield page.waitFor(100000);
                 yield browser.close();
                 console.log(error);
                 throw new Error('Error scrap HDI');

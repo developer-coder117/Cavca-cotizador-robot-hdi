@@ -45,18 +45,25 @@ class AxaBot {
                 yield page.type(config_json_1.default.AXA.login.pass, config_json_1.default.AXA.credentials.pass);
                 console.log("AXA scraper : seleccionando boton");
                 yield page.waitForSelector(config_json_1.default.AXA.login.btn);
-                yield page.click(config_json_1.default.AXA.login.btn);
+                yield Promise.all([
+                    yield page.click(config_json_1.default.AXA.login.btn),
+                    page.waitForNavigation({ waitUntil: 'networkidle0' }),
+                    console.log("Espere... "),
+                ]);
                 console.log("AXA scraper :  iniciando sesion espere...");
-                yield page.waitForNavigation();
                 console.log("AXA scraper :  buscando formulario");
-                yield page.goto(config_json_1.default.AXA.redirect.form);
-                console.log("AXA scraper :  redireccionando espere...");
-                console.log("AXA scraper :  seleccionando tipo de documento espere...");
-                yield page.waitForSelector(config_json_1.default.AXA.menu.cmbIdDocument);
-                console.log("AXA scraper :  click boton de seleccion");
-                yield page.click(config_json_1.default.AXA.menu.cmbIdDocument);
-                console.log("AXA scraper :  escribiendo espere...");
-                yield page.type(config_json_1.default.AXA.menu.cmbIdDocument, config_json_1.default.AXA.menu.cmbIdDocumentIn);
+                yield Promise.all([
+                    yield page.goto(config_json_1.default.AXA.redirect.form),
+                    page.waitForNavigation({ waitUntil: 'networkidle0' }),
+                    console.log("Espere... "),
+                ]);
+                pendingXHR.waitForAllXhrRequest();
+                page.click("body", { delay: 400 });
+                console.log("Esperando elemento "),
+                    yield page.waitForSelector('.row #People_DocumentNumber');
+                yield page.click('.row #People_DocumentNumber');
+                yield page.waitForSelector('fieldset > .row > .col-md-6 > .has-success > .labelhalf');
+                yield page.click('fieldset > .row > .col-md-6 > .has-success > .labelhalf');
             }
             catch (error) {
                 yield browser.close();

@@ -34,18 +34,30 @@ export class AxaBot implements GlobalFunction {
             await page.type(data.AXA.login.pass, data.AXA.credentials.pass);
             console.log("AXA scraper : seleccionando boton");
             await page.waitForSelector(data.AXA.login.btn);
-            await page.click(data.AXA.login.btn);
+            await Promise.all([
+                await page.click(data.AXA.login.btn),
+                page.waitForNavigation({ waitUntil: 'networkidle0' }),
+                console.log("Espere... "),
+                                                  ]);
             console.log("AXA scraper :  iniciando sesion espere...")
-            await page.waitForNavigation();
+
             console.log("AXA scraper :  buscando formulario")
-            await page.goto(data.AXA.redirect.form);
-            console.log("AXA scraper :  redireccionando espere...")
-            console.log("AXA scraper :  seleccionando tipo de documento espere...")
-            await page.waitForSelector(data.AXA.menu.cmbIdDocument);
-            console.log("AXA scraper :  click boton de seleccion")
-            await page.click(data.AXA.menu.cmbIdDocument);
-            console.log("AXA scraper :  escribiendo espere...")
-            await page.type(data.AXA.menu.cmbIdDocument, data.AXA.menu.cmbIdDocumentIn);
+            
+            await Promise.all([
+                await page.goto(data.AXA.redirect.form),
+                page.waitForNavigation({ waitUntil: 'networkidle0' }),
+                console.log("Espere... "),
+                              ]);
+                pendingXHR.waitForAllXhrRequest();
+                page.click("body",{delay:400})
+                console.log("Esperando elemento "),
+                await page.waitForSelector('.row #People_DocumentNumber')
+                await page.click('.row #People_DocumentNumber')
+  
+                await page.waitForSelector('fieldset > .row > .col-md-6 > .has-success > .labelhalf')
+                await page.click('fieldset > .row > .col-md-6 > .has-success > .labelhalf')
+  
+
         } catch (error) {
             await browser.close();
             console.log(error);

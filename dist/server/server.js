@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyparser = require("body-parser");
 const routes_1 = require("../routes/routes");
-const SbsBot_1 = require("../controller/SbsBot");
+const SegurosEstado_1 = require("../controller/SegurosEstado");
 class Server {
     constructor(puerto) {
         this.port = puerto;
@@ -25,8 +25,9 @@ class Server {
         this.app.listen(this.port, callback());
         //new HdiBot().cotizar();
         //new MapfreBot().cotizar();
-        new SbsBot_1.SbsBot().cotizar();
-        //new AxaBot().cotizar()
+        //new SbsBot().cotizar();
+        //new AxaBot().cotizar();
+        new SegurosEstado_1.SEBot().cotizar();
         this.appConfig();
         this.includeRoutes();
     }

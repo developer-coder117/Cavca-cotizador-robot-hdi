@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import {Comparacion} from '../utils/scraperUtils';
-import {RandomizeWaits} from '../utils/scraperUtils'
+
 import data from '../data/config.json'
 import {GlobalFunction} from './GlobalFunction'
 const { PendingXHR } = require('pending-xhr-puppeteer');
@@ -130,7 +130,8 @@ interface Credentials {
 export class SbsBot  implements GlobalFunction {
     public login(): Promise<void> {
         throw new Error("Method not implemented.");
-    }    public verify(): Promise<void> {
+    } 
+    public verify(): Promise<void> {
         throw new Error("Method not implemented.");
     }
     public async cotizar() {
