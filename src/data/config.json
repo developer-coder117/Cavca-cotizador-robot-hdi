@@ -333,8 +333,8 @@
             "selectProducto":"select#ctl00_ContentPlaceHolder1_varPRODUCTO.form-control",
             "valueProducto":"3",
             "zonaCirculacion":"select#ctl00_ContentPlaceHolder1_varZONA.form-control",
-            "zonaValue":"2",
-            "marca":"input#ctl00_ContentPlaceHolder1_varBRAND_DisplayValue.form-control.ui-autocomplete-input",
+            "zonaValue":"6",
+            "marca":"input#ctl00_ContentPlaceHolder1_varBRAND_DisplayValue.form-control",
             "marcaValue":"KIA",
             "clase":"select#ctl00_ContentPlaceHolder1_varCLASE.form-control",
             "claseValue":"1",
@@ -342,6 +342,20 @@
             "placaIn":"UUU330",
             "thirdPart":"h3#ctl00_ContentPlaceHolder1_tblSection2.ui-accordion-header.ui-helper-reset.ui-state-default.ui-corner-all.ui-accordion-icons"
         },
+        "formulario3":{
+            "checkbox1":"input#ctl00_ContentPlaceHolder1_varmayor_cuantia_deducible_0",
+            "selectCobertura":"select#ctl00_ContentPlaceHolder1_varTIPO_COBERTURA.form-control",
+            "coberturaValue":"1",
+            "RCE":"select#ctl00_ContentPlaceHolder1_varLIMITE_RC.form-control",
+            "RCEval":"21",
+            "primas":"h3#ctl00_ContentPlaceHolder1_tblSection3.ui-accordion-header.ui-helper-reset.ui-state-default.ui-accordion-icons.ui-corner-all"
+                    },
+        "formulario4":{
+            "agreement":"input#ctl00_ContentPlaceHolder1_varTERMINOS_CONDICIONES",
+            "habeasData":"input#ctl00_ContentPlaceHolder1_varTRATAMIENTO_DATOS",
+            "calcular":"input#ctl00_ContentPlaceHolder1_varCalc.btn.btn-primary.Button",
+            "generar":"input#ctl00_ContentPlaceHolder1_cmdGenerate.btn.btn-primary.Button"
+                        },
     "login":{
         "user":"input#dnn_ctr_Login_Login_DNN_txtUsername.NormalTextBox",
         "password":"input#dnn_ctr_Login_Login_DNN_txtPassword.NormalTextBox",
