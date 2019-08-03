@@ -14,7 +14,7 @@ export class SEBot  implements GlobalFunction {
     public async cotizar() {
         const browser = await puppeteer.launch({
             headless:false,
-            slowMo:50
+            slowMo:60
         });
         const page = await browser.newPage();
         await page.goto(data.SegurosEstado.url);
@@ -89,11 +89,30 @@ export class SEBot  implements GlobalFunction {
             await page.waitForSelector(data.SegurosEstado.formulario2.placa)
             await page.type(data.SegurosEstado.formulario2.placa,data.SegurosEstado.formulario2.placaIn)
             await pendingXHR.waitForAllXhrFinished()
-            //Parte 3 
             await page.waitForSelector(data.SegurosEstado.formulario2.thirdPart)
             await page.click(data.SegurosEstado.formulario2.thirdPart)
+            //Parte 3
+            await page.waitForSelector(data.SegurosEstado.formulario3.checkbox1)
+            await page.click(data.SegurosEstado.formulario3.checkbox1)
             await pendingXHR.waitForAllXhrFinished()
-            }  catch (error) {
+            await page.waitForSelector(data.SegurosEstado.formulario3.selectCobertura)
+            await page.select(data.SegurosEstado.formulario3.selectCobertura,data.SegurosEstado.formulario3.coberturaValue)
+            await pendingXHR.waitForAllXhrFinished()
+            await page.waitForSelector(data.SegurosEstado.formulario3.RCE)
+            await page.select(data.SegurosEstado.formulario3.RCE,data.SegurosEstado.formulario3.RCEval)
+            await pendingXHR.waitForAllXhrFinished()
+            await page.click(data.SegurosEstado.formulario3.primas)
+            await pendingXHR.waitForAllXhrFinished()
+            //Parte4
+            await page.waitForSelector(data.SegurosEstado.formulario4.agreement)
+            await page.click(data.SegurosEstado.formulario4.agreement)
+            await page.waitForSelector(data.SegurosEstado.formulario4.habeasData)
+            await page.click(data.SegurosEstado.formulario4.habeasData)
+            //await page.waitForSelector(data.SegurosEstado.formulario4.calcular)
+            //await page.click(data.SegurosEstado.formulario4.calcular)
+            await page.waitForSelector(data.SegurosEstado.formulario4.generar)
+            await page.click(data.SegurosEstado.formulario4.generar)
+            } catch (error) {
             console.log("Error")
             await page.waitFor(100000)
             await browser.close();
@@ -102,4 +121,3 @@ export class SEBot  implements GlobalFunction {
                               }
                             }
                         }
-
