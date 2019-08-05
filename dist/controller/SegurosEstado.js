@@ -25,7 +25,7 @@ class SEBot {
         return __awaiter(this, void 0, void 0, function* () {
             const browser = yield puppeteer_1.default.launch({
                 headless: false,
-                slowMo: 50
+                slowMo: 60
             });
             const page = yield browser.newPage();
             yield page.goto(config_json_1.default.SegurosEstado.url);
@@ -91,9 +91,7 @@ class SEBot {
                 yield page.select(config_json_1.default.SegurosEstado.formulario2.selectProducto, config_json_1.default.SegurosEstado.formulario2.valueProducto);
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario2.zonaCirculacion);
-                yield page.evaluate((conf) => {
-                    document.querySelector(conf.formulario2.zonaCirculacion).value = conf.formulario2.zonaValue;
-                }, config_json_1.default.SegurosEstado);
+                yield page.select(config_json_1.default.SegurosEstado.formulario2.zonaCirculacion, config_json_1.default.SegurosEstado.formulario2.zonaValue);
                 yield pendingXHR.waitForAllXhrFinished();
                 yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario2.marca);
                 yield page.type(config_json_1.default.SegurosEstado.formulario2.marca, config_json_1.default.SegurosEstado.formulario2.marcaValue);
@@ -102,10 +100,42 @@ class SEBot {
                 yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario2.placa);
                 yield page.type(config_json_1.default.SegurosEstado.formulario2.placa, config_json_1.default.SegurosEstado.formulario2.placaIn);
                 yield pendingXHR.waitForAllXhrFinished();
-                //Parte 3 
                 yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario2.thirdPart);
                 yield page.click(config_json_1.default.SegurosEstado.formulario2.thirdPart);
+                //Parte 3
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario3.checkbox1);
+                yield page.click(config_json_1.default.SegurosEstado.formulario3.checkbox1);
                 yield pendingXHR.waitForAllXhrFinished();
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario3.selectCobertura);
+                yield page.select(config_json_1.default.SegurosEstado.formulario3.selectCobertura, config_json_1.default.SegurosEstado.formulario3.coberturaValue);
+                yield pendingXHR.waitForAllXhrFinished();
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario3.RCE);
+                yield page.select(config_json_1.default.SegurosEstado.formulario3.RCE, config_json_1.default.SegurosEstado.formulario3.RCEval);
+                yield pendingXHR.waitForAllXhrFinished();
+                yield page.click(config_json_1.default.SegurosEstado.formulario3.primas);
+                yield pendingXHR.waitForAllXhrFinished();
+                //Parte4
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario4.agreement);
+                yield page.click(config_json_1.default.SegurosEstado.formulario4.agreement);
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario4.habeasData);
+                yield page.click(config_json_1.default.SegurosEstado.formulario4.habeasData);
+                //await page.waitForSelector(data.SegurosEstado.formulario4.calcular)
+                //await page.click(data.SegurosEstado.formulario4.calcular)
+                page.on('dialog', (dialog) => __awaiter(this, void 0, void 0, function* () {
+                    console.log(dialog.message());
+                    yield dialog.accept();
+                }));
+                page.evaluate(() => alert('1'));
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario4.calcular);
+                yield page.click(config_json_1.default.SegurosEstado.formulario4.calcular);
+                // wait and click the alert button
+                page.on('dialog', (dialog) => __awaiter(this, void 0, void 0, function* () {
+                    console.log(dialog.message());
+                    yield dialog.accept();
+                }));
+                page.evaluate(() => alert('1'));
+                yield page.waitForSelector(config_json_1.default.SegurosEstado.formulario4.generar);
+                yield page.click(config_json_1.default.SegurosEstado.formulario4.generar);
             }
             catch (error) {
                 console.log("Error");

@@ -347,7 +347,7 @@
             "selectCobertura":"select#ctl00_ContentPlaceHolder1_varTIPO_COBERTURA.form-control",
             "coberturaValue":"1",
             "RCE":"select#ctl00_ContentPlaceHolder1_varLIMITE_RC.form-control",
-            "RCEval":"21",
+            "RCEval":"6",
             "primas":"h3#ctl00_ContentPlaceHolder1_tblSection3.ui-accordion-header.ui-helper-reset.ui-state-default.ui-accordion-icons.ui-corner-all"
                     },
         "formulario4":{

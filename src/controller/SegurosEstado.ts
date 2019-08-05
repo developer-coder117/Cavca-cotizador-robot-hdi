@@ -110,6 +110,19 @@ export class SEBot  implements GlobalFunction {
             await page.click(data.SegurosEstado.formulario4.habeasData)
             //await page.waitForSelector(data.SegurosEstado.formulario4.calcular)
             //await page.click(data.SegurosEstado.formulario4.calcular)
+            page.on('dialog', async dialog => {
+                console.log(dialog.message());
+                await dialog.accept();
+              });
+              page.evaluate(() => alert('1'));
+            await page.waitForSelector(data.SegurosEstado.formulario4.calcular)
+            await page.click(data.SegurosEstado.formulario4.calcular)
+            // wait and click the alert button
+            page.on('dialog', async dialog => {
+                console.log(dialog.message());
+                await dialog.accept();
+              });
+              page.evaluate(() => alert('1'));
             await page.waitForSelector(data.SegurosEstado.formulario4.generar)
             await page.click(data.SegurosEstado.formulario4.generar)
             } catch (error) {
